@@ -1,4 +1,4 @@
-# Singly-list / Односвязный обычный список
+# Singly-list / Односвязный обычный список / Структура в виде списка
 
 ![gif](https://i.pinimg.com/originals/c0/00/21/c0002158c2f4a0c45c8459754f8f4734.gif)
 
