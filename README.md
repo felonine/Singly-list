@@ -22,3 +22,9 @@ g++ SinglyListOnStyleTokyoGhoul.cpp -o runner
 .\runner.exe
 ```
 
+![gif](https://i.pinimg.com/originals/82/f3/80/82f3802d3f372c7f87228c63b967ad75.gif)
+
+# Последнее обновление +
+
+* Добавил метод erase() - удаление произвольного элемента в списке.
+
