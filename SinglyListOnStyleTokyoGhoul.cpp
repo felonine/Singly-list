@@ -1,5 +1,15 @@
 #include <iostream>
- 
+#include <string>
+
+class valueError : public std::exception {
+  std::string msg;
+  public:
+  explicit valueError(const std::string& message) noexcept : msg(message) {}
+   const char* what() const noexcept override { 
+    return msg.c_str();
+   }
+};
+
 
 struct Ghoul {
  int data{0};
@@ -28,6 +38,7 @@ class Anteiku_list {
         Ghoul* node = new Ghoul(data);
          if(head == nullptr) { 
             head = node;
+            tail = node;
          }
          tail->next = node;
          tail = node;
@@ -35,7 +46,7 @@ class Anteiku_list {
     }
      int& operator[](int idx) { 
       Ghoul* node = get_at_index(idx);
-      // if(!node) throw valueError("dafaf");
+      if(!node) throw valueError("Error, havent elements ..101101..");
       return node->get_ref_data();
      }
      void push_front(const int& data) { 
@@ -101,19 +112,35 @@ class Anteiku_list {
             }
             std::cout << std::endl;
          }
+          void erase(int idx) {
+              if(!head) return;
+              if(idx < 0 || idx >= size) return;
+               if(idx == 0) {pop_front(); return; }
+               if(idx == size - 1) { pop_back(); return; }
+
+               Ghoul* left = get_at_index(idx - 1);
+              if(!left) return;
+              Ghoul* target = left->next;
+              left->next = target->next;
+              delete target;
+               size--;
+          }
  };
+ // THANKS FOR WATCHING MY CODE <3 ++++++++++++++++++++++
 
   int main(void) {
 Anteiku_list l1;
 l1.push_front(111);
 l1.push_back(23);
-// l1.show_listAnteiku();
-//   try{
-//     l1[0] = 13;
-//     l1.show_listAnteiku();
-//   } catch(const valueError& ex) { 
-//     std::cout << ex.what();
-//   }
+l1.show_list();
+  try{
+    l1[0] = 13;
+    l1.show_list();
+  } catch(const valueError& ex) { 
+    std::cout << ex.what();
+  }
   l1.insert(0, 13);
+  l1.erase(1);
   l1.show_list();
+   
 }
